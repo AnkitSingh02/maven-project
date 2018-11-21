@@ -24,6 +24,24 @@ pipeline
                 build job: 'Deploy_To_Staging(Maven_Project)'
                 }
             }
+	     
+	 stage ('Deploy To Production'){
+		 steps{
+			 timeout(time:5, unit:'DAYS'){
+			 	input message: 'APPROVE PRODUCTION DEPLOYMENT ? ' 
+			 }
+		 build job: 'Deploy_To_Production(Maven_Project)'
+		  }
+		 
+		 post {
+		success{
+			echo 'Code Deployed to Production'
+			}
+		failure{
+			echo 'Deployment Failed !!!'
+			 }
+		  } 
+	 }
 	}
 }	
 	
