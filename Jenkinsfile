@@ -17,10 +17,10 @@ pipeline
 			echo 'Now Archiving...'
 			archiveArtifacts artifacts: '**/target/*.war'
 			}
-		}	
-	   }    
-	 stage{
-           step{
+		  } 
+	        }		
+	 stage ('Deploy To Staging'){
+           steps{
                 build job: 'Project Deploy_To_Staging(Maven_Project)'
                 }
             }
